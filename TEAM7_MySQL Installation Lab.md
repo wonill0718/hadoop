@@ -34,7 +34,7 @@ mysql
 
 [centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
 
-#2 Creating Databases for Cloudera Software
+#2 Creating Databases for Cloudera Software  
 CREATE DATABASE cmserver DEFAULT CHARACTER SET utf8;
 GRANT ALL on cmserver.* TO 'cmserveruser'@'%' IDENTIFIED BY 'skcc';
 
