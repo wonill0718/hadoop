@@ -37,4 +37,26 @@ ps -ef | grep ntpd
 
 
 
-cm에 마리아db설치? / mysql <-
+cm에 mysql 설치
+1. wget install
+sudo yum install wget
+
+2. my-sql install
+cd ~
+
+sudo wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+sudo yum update
+
+sudo yum install mysql-server
+
+sudo systemctl start mysqld
+
+3. my-sql execute
+mysql
+
+
+
+cm설치
