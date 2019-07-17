@@ -17,7 +17,9 @@ sudo systemctl start mysqld
 #3. my-sql execute
 mysql
 </code></pre>
+
 ### Step 2: Install and Configure Databases(cm node)
+<pre><code>
 #1 mysql jdbc driver 다운 / 업로드 / 카피
 [centos@m1: /home/centos]$ sudo mkdir -p /usr/share/java/
 [centos@m1: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/
