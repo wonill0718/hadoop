@@ -1,3 +1,4 @@
+##### CM Install Lab
 #### System Configuration Checks
 
 ### 1. Check vm.swappiness on all your nodes o Set the value to 1 if necessary
@@ -54,14 +55,18 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 ### 6. Show that forward and reverse host lookups are correctly resolved
 <pre><code>
 #hostname 변경
-[centos@ip-172-31-9-97: ~]$ sudo hostname m1
+[centos@m1: ~]$ hostnamectl set-hostname m1.skcc.com
+[centos@cm: ~]$ hostnamectl set-hostname cm.skcc.com
+[centos@d1: ~]$ hostnamectl set-hostname d1.skcc.com
+[centos@d2: ~]$ hostnamectl set-hostname d2.skcc.com
+[centos@d3: ~]$ hostnamectl set-hostname d3.skcc.com
 
 #/etc/hosts 파일 수정
-15.164.76.42	m1
-52.78.144.115	cm
-52.78.158.39	d1
-52.78.181.163	d2
-52.78.190.218	d3
+15.164.76.42	m1.skcc.com m1
+52.78.144.115	cm.skcc.com cm
+52.78.158.39	d1.skcc.com d1
+52.78.181.163	d2.skcc.com d2
+52.78.190.218	d3.skcc.com d3
 
 #private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
 [centos@d3 .ssh]$ ls -al
@@ -103,9 +108,9 @@ Created symlink from /etc/systemd/system/sockets.target.wants/nscd.socket to /us
 
 [centos@ip-172-31-9-97: ~]$ sudo systemctl status nscd
 ● nscd.service - Name Service Cache Daemon
-   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset:                                    disabled)
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset:disabled)
    Active: active (running) since Wed 2019-07-17 02:18:14 UTC; 13s ago
-  Process: 21160 ExecStart=/usr/sbin/nscd $NSCD_OPTIONS (code=exited, status=0/S                                   UCCESS)
+  Process: 21160 ExecStart=/usr/sbin/nscd $NSCD_OPTIONS (code=exited, status=0/SUCCESS)
  Main PID: 21161 (nscd)
    CGroup: /system.slice/nscd.service
            └─21161 /usr/sbin/nscd
