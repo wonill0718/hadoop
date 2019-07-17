@@ -1,0 +1,40 @@
+1. Check vm.swappiness on all your nodes
+ o Set the value to 1 if necessary
+
+-> $ sysctl -w vm.swappiness=1
+or
+   $ echo 1 >/proc/sys/vm/swappiness
+
+2. Show the mount attributes of your volume(s)
+-> $ cat /proc/mounts
+
+-> $ df
+
+3. If you have ext-based volumes, list the reserve space setting
+ o XFS volumes do not support reserve space
+
+-> 없음
+
+4. Disable transparent hugepage support
+
+-> 없음
+
+5. List your network interface configuration
+
+
+
+6. Show that forward and reverse host lookups are correctly resolved
+ o For /etc/hosts, use getent
+ o For DNS, use nslookup
+
+7. Show the nscd service is running
+설치필요
+ps -ef | grep nscd
+
+8. Show the ntpd service is running
+설치필요
+ps -ef | grep ntpd
+
+
+
+cm에 마리아db설치? / mysql <-
