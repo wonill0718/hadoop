@@ -1,3 +1,4 @@
+#### System Configuration Checks
 ### hostname 변경
 <pre><code>
 [centos@ip-172-31-9-97: ~]$ sudo hostname m1
