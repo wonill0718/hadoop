@@ -26,7 +26,7 @@ sudo yum install cloudera-manager-daemons cloudera-manager-agent
 [centos@m1: /home/centos]$ sudo vi /etc/cloudera-scm-agent/config.ini
 [General]
 # Hostname of the CM server.
-server_host=cm
+server_host=cm.skcc.com
 
 # Port that the CM server is listening on.
 server_port=7182
