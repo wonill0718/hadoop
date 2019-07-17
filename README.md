@@ -1,3 +1,5 @@
+https://github.com/wonill0718/hadoop/blob/master/TEAM7_CM%20Install%20Lab.md
+
 ### hostname 변경
 <pre><code>
 [centos@ip-172-31-9-97: ~]$ sudo hostname m1
