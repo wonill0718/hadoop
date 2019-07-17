@@ -23,15 +23,12 @@ mysql
 #1 mysql jdbc driver 다운 / 업로드 / 카피
 [centos@cm: /home/centos]$ sudo wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
 [centos@cm: /home/centos]$ sudo mkdir -p /usr/share/java/
-[centos@cm: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/
-[centos@cm: /home/centos]$ sudo cp mysql-connector-java-5.1.47.jar /usr/share/java/mysql-connector-java.jar
+[centos@cm: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/mysql-connector-java.jar
 
+# 타 노드에 MYSQL JDBC 드라이버 복사
 [centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@m1:/usr/share/java/mysql-connector-java.jar
-
 [centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d1:/usr/share/java/mysql-connector-java.jar
-
 [centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d2:/usr/share/java/mysql-connector-java.jar
-
 [centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
 
 #2 Creating Databases for Cloudera Software  
