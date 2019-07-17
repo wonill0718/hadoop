@@ -1,3 +1,4 @@
+##### Cloudera Manager Install Lab
 #### Path B install using CM 5.15.x
 The full rundown is here : https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
 
@@ -32,31 +33,4 @@ server_port=7182
 
 ### Start the Agents by running the following command on all hosts: (cm node를 제외한 4개 node)
 sudo systemctl start cloudera-scm-agent
-</code></pre>
-
-### Step 5: Install and Configure Databases(cm node)
-<pre><code>
-# mysql jdbc driver 다운 / 업로드 / 카피
-[centos@m1: /home/centos]$ sudo mkdir -p /usr/share/java/
-[centos@m1: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/
-[centos@m1: /home/centos]$ sudo cp mysql-connector-java-5.1.47.jar /usr/share/java/
-
-# Creating Databases for Cloudera Software
-CREATE DATABASE cmserver DEFAULT CHARACTER SET utf8;
-GRANT ALL on cmserver.* TO 'cmserveruser'@'%' IDENTIFIED BY 'skcc';
-
-CREATE DATABASE metastore DEFAULT CHARACTER SET utf8;
-GRANT ALL on metastore.* TO 'hiveuser'@'%' IDENTIFIED BY 'skcc';
-
-CREATE DATABASE amon DEFAULT CHARACTER SET utf8;
-GRANT ALL on amon.* TO 'amonuser'@'%' IDENTIFIED BY 'skcc';
-
-CREATE DATABASE rman DEFAULT CHARACTER SET utf8;
-GRANT ALL on rman.* TO 'rmanuser'@'%' IDENTIFIED BY 'skcc';
-
-CREATE DATABASE oozie DEFAULT CHARACTER SET utf8;
-GRANT ALL on oozie.* TO 'oozieuser'@'%' IDENTIFIED BY 'skcc';
-
-CREATE DATABASE hue DEFAULT CHARACTER SET utf8;
-GRANT ALL on hue.* TO 'hueuser'@'%' IDENTIFIED BY 'skcc';
 </code></pre>
