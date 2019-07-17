@@ -52,13 +52,13 @@ GRANT ALL on hue.* TO 'hueuser'@'%' IDENTIFIED BY 'skcc';
 </code></pre>
 
 
-# 3 Move old InnoDB log files to backup location
+### Step 3:  Move old InnoDB log files to backup location
 <pre><code>
 sudo mv /var/lib/mysql/ib_logfile0 ~/
 sudo mv /var/lib/mysql/ib_logfile1 ~/
 </code></pre>
 
-# 4 Update my.conf  
+### Step 4:  Update my.conf  
 <pre><code>
 sudo vi /etc/my.cnf
 
@@ -116,8 +116,14 @@ sql_mode=STRICT_ALL_TABLES
 </code></pre>
 
 
-# 5 Enable MySQL server starts at boot / Strat the MySQL server
+### Step 5:  Enable MySQL server starts at boot / Strat the MySQL server
 <pre><code>
 sudo systemctl enable mysqld
 sudo systemctl start mysqld
+</code></pre>
+
+
+### Step 6: Preparing the Cloudera Manager Server Database
+<pre><code>
+[centos@cm: /home/centos]$ sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql cmserver cmserveruser skcc
 </code></pre>
