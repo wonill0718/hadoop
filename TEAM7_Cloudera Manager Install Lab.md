@@ -16,14 +16,13 @@ sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KE
 ### Step 3: Install Cloudera Manager Server (cm서버에서)
 <pre><code>
 sudo yum install cloudera-manager-daemons cloudera-manager-server
+</code></pre>
 
-#### On all hosts, run the following command to install the Cloudera Manager agent: (5nodes)
+### Step 4: Install Cloudera Manager agent: (5nodes)
+<pre><code>
 sudo yum install cloudera-manager-daemons cloudera-manager-agent
 
-### On all hosts, configure the Cloudera Manager Agent to point to the Cloudera Manager Server by setting the following properties in the /etc/cloudera-scm-agent/config.ini configuration file:
-<pre><code>
 [centos@m1: /home/centos]$ sudo vi /etc/cloudera-scm-agent/config.ini
-
 [General]
 # Hostname of the CM server.
 server_host=cm
@@ -36,16 +35,8 @@ server_port=7182
 sudo systemctl start cloudera-scm-agent
 </code></pre>
 
-
 ### Step 4: Install and Configure Databases
 <pre><code>
-페이지 참조
-
-
-#### Ensure the MySQL server starts at boot:
-
-
-
 ### mysql jdbc driver 다운 / 업로드 / 카피 (cm에서)
 [centos@m1: /home/centos]$ sudo mkdir -p /usr/share/java/
 [centos@m1: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/
