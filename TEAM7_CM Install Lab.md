@@ -108,9 +108,9 @@ Created symlink from /etc/systemd/system/sockets.target.wants/nscd.socket to /us
 
 [centos@ip-172-31-9-97: ~]$ sudo systemctl status nscd
 ● nscd.service - Name Service Cache Daemon
-   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset:                                    disabled)
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset:disabled)
    Active: active (running) since Wed 2019-07-17 02:18:14 UTC; 13s ago
-  Process: 21160 ExecStart=/usr/sbin/nscd $NSCD_OPTIONS (code=exited, status=0/S                                   UCCESS)
+  Process: 21160 ExecStart=/usr/sbin/nscd $NSCD_OPTIONS (code=exited, status=0/SUCCESS)
  Main PID: 21161 (nscd)
    CGroup: /system.slice/nscd.service
            └─21161 /usr/sbin/nscd
@@ -133,67 +133,3 @@ Hint: Some lines were ellipsized, use -l to show in full.
 [centos@ip-172-31-9-97 ~]$ sudo yum install ntp
 [centos@ip-172-31-9-97 ~]$ sudo service ntpd start
 </code></pre>
-
-
-##### Cloudera Manager Install Lab
-#### Path B install using CM 5.15.x
-### Install a supported Oracle JDK on your first node
-### Install a supported JDBC connector on all nodes
-### Create the databases and access grants you will need
-### Configure Cloudera Manager to connect to the database
-### Start your Cloudera Manager server -- debug as necessary
-### Do not continue until you can browse your CM instance at port 7180
-
-
-##### MySQL/MariaDB Installation Lab
-#### Configure MySQL with a replica server
-#### MySQL installation - Plan Two Detail
-### 0.wget install(5nodes)
-
-sudo yum install wget
-
-### 1. Download and implement the official MySQL repo(cm)
-
-sudo wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-
-sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
-
-sudo yum update
-
-sudo yum install mysql-server
-
-sudo systemctl start mysqld
-
-## Enable the repo to install MySQL 5.5
-## Install the mysql package on all nodes
-파일wget
-
-tar zxvf mysql-connector-java-5.1.46.tar.gz
-
-sudo mkdir -p /usr/share/java/
-
-cd mysql-connector-java-5.1.46
-
-sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
-
-## Install mysql-server on the server and replica nodes
-## Download and copy the JDBC connector to all nodes.
-
-sudo scp /usr/share/java/mysql-connector-java.jar centos@m1:/usr/share/java/mysql-connector-java.jar
-
-sudo scp /usr/share/java/mysql-connector-java.jar centos@d1:/usr/share/java/mysql-connector-java.jar
-
-sudo scp /usr/share/java/mysql-connector-java.jar centos@d2:/usr/share/java/mysql-connector-java.jar
-
-sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
-
-### 2. You should not need to build a /etc/my.cnf file to start your MySQL server
-## You will have to modify it to support replication. Check MySQL documentation.
-### 3. Start the mysqld service.
-### 4. Use /usr/bin/mysql_secure_installation to:
-## a. Set password protection for the server
-## b. Revoke permissions for anonymous users
-## c. Permit remote privileged login
-## d. Remove test databases
-## e. Refresh privileges in memory
-## f. Refreshes the mysqld service
