@@ -60,5 +60,3 @@ GRANT ALL on oozie.* TO 'oozieuser'@'%' IDENTIFIED BY 'skcc';
 CREATE DATABASE hue DEFAULT CHARACTER SET utf8;
 GRANT ALL on hue.* TO 'hueuser'@'%' IDENTIFIED BY 'skcc';
 </code></pre>
-
-### Step 5: Set up the Cloudera Manager Database
