@@ -21,18 +21,18 @@ mysql
 ### Step 2: Install and Configure Databases(cm node)
 <pre><code>
 #1 mysql jdbc driver 다운 / 업로드 / 카피
-[centos@m1: /home/centos]$ sudo wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
-[centos@m1: /home/centos]$ sudo mkdir -p /usr/share/java/
-[centos@m1: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/
-[centos@m1: /home/centos]$ sudo cp mysql-connector-java-5.1.47.jar /usr/share/java/mysql-connector-java.jar
+[centos@cm: /home/centos]$ sudo wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
+[centos@cm: /home/centos]$ sudo mkdir -p /usr/share/java/
+[centos@cm: /home/centos]$ cp mysql-connector-java-5.1.47.jar /usr/share/java/
+[centos@cm: /home/centos]$ sudo cp mysql-connector-java-5.1.47.jar /usr/share/java/mysql-connector-java.jar
 
-[centos@m1: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@m1:/usr/share/java/mysql-connector-java.jar
+[centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@m1:/usr/share/java/mysql-connector-java.jar
 
-[centos@m1: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d1:/usr/share/java/mysql-connector-java.jar
+[centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d1:/usr/share/java/mysql-connector-java.jar
 
-[centos@m1: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d2:/usr/share/java/mysql-connector-java.jar
+[centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d2:/usr/share/java/mysql-connector-java.jar
 
-[centos@m1: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
+[centos@cm: /home/centos]$ sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
 
 #2 Creating Databases for Cloudera Software
 CREATE DATABASE cmserver DEFAULT CHARACTER SET utf8;
