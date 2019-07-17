@@ -1,1 +1,4 @@
+###### git 기본설정
+로컬에서  cmd를 열고
 git config --global user.email "email.email@com"
+git config --global user.name "your name"
