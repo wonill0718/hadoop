@@ -49,3 +49,8 @@ GRUB_DISABLE_RECOVERY="true"
 [centos@ip-172-31-9-87 ~]$ sudo reboot -f
 [centos@ip-172-31-9-87 ~]$ cat /proc/cmdline
 BOOT_IMAGE=/vmlinuz-3.10.0-229.20.1.el7.x86_64 root=/dev/mapper/centos-root ro rd.lvm.lv=centos/root rd.lvm.lv=centos/swap crashkernel=auto rhgb quiet transparent_hugepage=never
+
+
+
+
+wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
