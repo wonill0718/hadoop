@@ -39,14 +39,46 @@ vm.swappiness = 1
 </code></pre>
 
 ### 2. Show the mount attributes of your volume(s)
+<pre><code>
+[centos@m1: /home/centos]$ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/nvme0n1p1 104846316 1344872 103501444   2% /
+devtmpfs         7872836       0   7872836   0% /dev
+tmpfs            7895692       0   7895692   0% /dev/shm
+tmpfs            7895692   17092   7878600   1% /run
+tmpfs            7895692       0   7895692   0% /sys/fs/cgroup
+tmpfs            1579140       0   1579140   0% /run/user/1000
+</code></pre>
 
 ### 3. If you have ext-based volumes, list the reserve space setting o XFS volumes do not support reserve space
+--> no ext-based volumes
 
 ### 4. Disable transparent hugepage support
 
 ### 5. List your network interface configuration
+<pre><code>
+[centos@m1: /home/centos]$ ifconfig
+ens5: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
+        inet 172.31.9.97  netmask 255.255.240.0  broadcast 172.31.15.255
+        inet6 fe80::54:80ff:fe65:7442  prefixlen 64  scopeid 0x20<link>
+        ether 02:54:80:65:74:42  txqueuelen 1000  (Ethernet)
+        RX packets 113193  bytes 102307771 (97.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 68594  bytes 8786894 (8.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 1840  bytes 236238 (230.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1840  bytes 236238 (230.7 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre>
 
 ### 6. Show that forward and reverse host lookups are correctly resolved o For /etc/hosts, use getent o For DNS, use nslookup
+--> nothing to do
 
 ### 7. Show the nscd service is running
 <pre><code>
