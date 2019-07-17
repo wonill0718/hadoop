@@ -29,12 +29,6 @@ Not exist ext-based volumes
 always madvise [never]
 </code></pre>
 
-### 4. Disable transparent hugepage support
-<pre><code>
-# cat /sys/kernel/mm/transparent_hugepage/enabled
-always madvise [never]
-</code></pre>
-
 ### 5. List your network interface configuration
 <pre><code>
 [centos@m1: /home/centos]$ ifconfig
@@ -61,33 +55,15 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 <pre><code>
 #hostname 변경
 [centos@ip-172-31-9-97: ~]$ sudo hostname m1
-</code></pre>
 
-### 7. Show the nscd service is running
-<pre><code>
-[centos@m1: /home/centos]$ ps -ef | grep nscd
-nscd      2553     1  0 06:46 ?        00:00:00 /usr/sbin/nscd
-centos    6007  5338  0 06:55 pts/3    00:00:00 grep --color=auto nscd
-</code></pre>
-
-### 8. Show the ntpd service is running
-<pre><code>
-
-</code></pre>
-
-
-
-### /etc/hosts 파일 수정
-<pre><code>
+#/etc/hosts 파일 수정
 15.164.76.42	m1
 52.78.144.115	cm
 52.78.158.39	d1
 52.78.181.163	d2
 52.78.190.218	d3
-</code></pre>
 
-### private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
-<pre><code>
+#private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
 [centos@d3 .ssh]$ ls -al
 total 16
 drwx------. 2 centos centos   71 Jul 17 03:44 .
@@ -104,37 +80,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 d2
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 d3
 </code></pre>
-
-
-### 3. If you have ext-based volumes, list the reserve space setting o XFS volumes do not support reserve space
---> no ext-based volumes
-
-### 4. Disable transparent hugepage support
-
-### 5. List your network interface configuration
-<pre><code>
-[centos@m1: /home/centos]$ ifconfig
-ens5: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
-        inet 172.31.9.97  netmask 255.255.240.0  broadcast 172.31.15.255
-        inet6 fe80::54:80ff:fe65:7442  prefixlen 64  scopeid 0x20<link>
-        ether 02:54:80:65:74:42  txqueuelen 1000  (Ethernet)
-        RX packets 113193  bytes 102307771 (97.5 MiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 68594  bytes 8786894 (8.3 MiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10<host>
-        loop  txqueuelen 1000  (Local Loopback)
-        RX packets 1840  bytes 236238 (230.7 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1840  bytes 236238 (230.7 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-</code></pre>
-
-### 6. Show that forward and reverse host lookups are correctly resolved o For /etc/hosts, use getent o For DNS, use nslookup
---> nothing to do
 
 ### 7. Show the nscd service is running
 <pre><code>
