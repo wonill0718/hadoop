@@ -29,10 +29,53 @@ Not exist ext-based volumes
 always madvise [never]
 </code></pre>
 
-### hostname 변경
+### 4. Disable transparent hugepage support
 <pre><code>
+# cat /sys/kernel/mm/transparent_hugepage/enabled
+always madvise [never]
+</code></pre>
+
+### 5. List your network interface configuration
+<pre><code>
+[centos@m1: /home/centos]$ ifconfig
+ens5: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
+        inet 172.31.9.97  netmask 255.255.240.0  broadcast 172.31.15.255
+        inet6 fe80::54:80ff:fe65:7442  prefixlen 64  scopeid 0x20<link>
+        ether 02:54:80:65:74:42  txqueuelen 1000  (Ethernet)
+        RX packets 931  bytes 360188 (351.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 918  bytes 201631 (196.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 379  bytes 180665 (176.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 379  bytes 180665 (176.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre>
+
+### 6. Show that forward and reverse host lookups are correctly resolved
+<pre><code>
+#hostname 변경
 [centos@ip-172-31-9-97: ~]$ sudo hostname m1
 </code></pre>
+
+### 7. Show the nscd service is running
+<pre><code>
+[centos@m1: /home/centos]$ ps -ef | grep nscd
+nscd      2553     1  0 06:46 ?        00:00:00 /usr/sbin/nscd
+centos    6007  5338  0 06:55 pts/3    00:00:00 grep --color=auto nscd
+</code></pre>
+
+### 8. Show the ntpd service is running
+<pre><code>
+
+</code></pre>
+
+
 
 ### /etc/hosts 파일 수정
 <pre><code>
