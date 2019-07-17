@@ -149,6 +149,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 #### Configure MySQL with a replica server
 #### MySQL installation - Plan Two Detail
 ### 0.wget install(5nodes)
+
 sudo yum install wget
 
 ### 1. Download and implement the official MySQL repo(cm)
@@ -177,9 +178,13 @@ sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java
 
 ## Install mysql-server on the server and replica nodes
 ## Download and copy the JDBC connector to all nodes.
+
 sudo scp /usr/share/java/mysql-connector-java.jar centos@m1:/usr/share/java/mysql-connector-java.jar
+
 sudo scp /usr/share/java/mysql-connector-java.jar centos@d1:/usr/share/java/mysql-connector-java.jar
+
 sudo scp /usr/share/java/mysql-connector-java.jar centos@d2:/usr/share/java/mysql-connector-java.jar
+
 sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
 
 ### 2. You should not need to build a /etc/my.cnf file to start your MySQL server
