@@ -1,9 +1,9 @@
-# hostname 변경
+### hostname 변경
 <pre><code>
 [centos@ip-172-31-9-97: ~]$ sudo hostname m1
 </code></pre>
 
-# /etc/hosts 파일 수정
+### /etc/hosts 파일 수정
 <pre><code>
 15.164.76.42	m1
 52.78.144.115	cm
@@ -12,8 +12,8 @@
 52.78.190.218	d3
 </code></pre>
 
-# private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
-
+### private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
+<pre><code>
 [centos@d3 .ssh]$ ls -al
 total 16
 drwx------. 2 centos centos   71 Jul 17 03:44 .
@@ -32,32 +32,25 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE
 </code></pre>
 
 
-
-
-[centos@ip-172-31-9-97 ~]$ sudo sysctl vm.swappiness=1
-<pre><code>
-vm.swappiness = 1
-</code></pre>
-
-1. Check vm.swappiness on all your nodes o Set the value to 1 if necessary
+### 1. Check vm.swappiness on all your nodes o Set the value to 1 if necessary
 <pre><code>
 [centos@ip-172-31-9-97 ~]$ sudo sysctl vm.swappiness=1
 vm.swappiness = 1
 </code></pre>
 
-2. Show the mount attributes of your volume(s)
+### 2. Show the mount attributes of your volume(s)
 
-3. If you have ext-based volumes, list the reserve space setting o XFS volumes do not support reserve space
+### 3. If you have ext-based volumes, list the reserve space setting o XFS volumes do not support reserve space
 
-4. Disable transparent hugepage support
+### 4. Disable transparent hugepage support
 
-5. List your network interface configuration
+### 5. List your network interface configuration
 
-6. Show that forward and reverse host lookups are correctly resolved o For /etc/hosts, use getent o For DNS, use nslookup
+### 6. Show that forward and reverse host lookups are correctly resolved o For /etc/hosts, use getent o For DNS, use nslookup
 
-7. Show the nscd service is running
+### 7. Show the nscd service is running
 
-8. Show the ntpd service is running
+### 8. Show the ntpd service is running
 <pre><code>
 [centos@ip-172-31-9-97 ~]$ sudo yum install ntp
 [centos@ip-172-31-9-97 ~]$ sudo service ntpd start
