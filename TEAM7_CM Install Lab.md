@@ -1,3 +1,4 @@
+##### CM Install Lab
 #### System Configuration Checks
 
 ### 1. Check vm.swappiness on all your nodes o Set the value to 1 if necessary
@@ -54,14 +55,18 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 ### 6. Show that forward and reverse host lookups are correctly resolved
 <pre><code>
 #hostname 변경
-[centos@ip-172-31-9-97: ~]$ sudo hostname m1
+[centos@m1: ~]$ hostnamectl set-hostname m1.skcc.com
+[centos@cm: ~]$ hostnamectl set-hostname cm.skcc.com
+[centos@d1: ~]$ hostnamectl set-hostname d1.skcc.com
+[centos@d2: ~]$ hostnamectl set-hostname d2.skcc.com
+[centos@d3: ~]$ hostnamectl set-hostname d3.skcc.com
 
 #/etc/hosts 파일 수정
-15.164.76.42	m1
-52.78.144.115	cm
-52.78.158.39	d1
-52.78.181.163	d2
-52.78.190.218	d3
+15.164.76.42	m1.skcc.com m1
+52.78.144.115	cm.skcc.com cm
+52.78.158.39	d1.skcc.com d1
+52.78.181.163	d2.skcc.com d2
+52.78.190.218	d3.skcc.com d3
 
 #private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
 [centos@d3 .ssh]$ ls -al
@@ -128,3 +133,62 @@ Hint: Some lines were ellipsized, use -l to show in full.
 [centos@ip-172-31-9-97 ~]$ sudo yum install ntp
 [centos@ip-172-31-9-97 ~]$ sudo service ntpd start
 </code></pre>
+
+
+##### Cloudera Manager Install Lab
+#### Path B install using CM 5.15.x
+### Install a supported Oracle JDK on your first node
+### Install a supported JDBC connector on all nodes
+### Create the databases and access grants you will need
+### Configure Cloudera Manager to connect to the database
+### Start your Cloudera Manager server -- debug as necessary
+### Do not continue until you can browse your CM instance at port 7180
+
+
+##### MySQL/MariaDB Installation Lab
+#### Configure MySQL with a replica server
+#### MySQL installation - Plan Two Detail
+### 0.wget install(5nodes)
+sudo yum install wget
+
+### 1. Download and implement the official MySQL repo(cm)
+
+sudo wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+sudo yum update
+
+sudo yum install mysql-server
+
+sudo systemctl start mysqld
+
+## Enable the repo to install MySQL 5.5
+## Install the mysql package on all nodes
+파일wget
+
+tar zxvf mysql-connector-java-5.1.46.tar.gz
+
+sudo mkdir -p /usr/share/java/
+
+cd mysql-connector-java-5.1.46
+
+sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
+
+## Install mysql-server on the server and replica nodes
+## Download and copy the JDBC connector to all nodes.
+sudo scp /usr/share/java/mysql-connector-java.jar centos@m1:/usr/share/java/mysql-connector-java.jar
+sudo scp /usr/share/java/mysql-connector-java.jar centos@d1:/usr/share/java/mysql-connector-java.jar
+sudo scp /usr/share/java/mysql-connector-java.jar centos@d2:/usr/share/java/mysql-connector-java.jar
+sudo scp /usr/share/java/mysql-connector-java.jar centos@d3:/usr/share/java/mysql-connector-java.jar
+
+### 2. You should not need to build a /etc/my.cnf file to start your MySQL server
+## You will have to modify it to support replication. Check MySQL documentation.
+### 3. Start the mysqld service.
+### 4. Use /usr/bin/mysql_secure_installation to:
+## a. Set password protection for the server
+## b. Revoke permissions for anonymous users
+## c. Permit remote privileged login
+## d. Remove test databases
+## e. Refresh privileges in memory
+## f. Refreshes the mysqld service
