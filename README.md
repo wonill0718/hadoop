@@ -81,6 +81,46 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 --> nothing to do
 
 ### 7. Show the nscd service is running
+<pre><code>
+# 1. nscd 상태를 체크한다
+[centos@ip-172-31-9-97: ~]$ sudo systemctl status nscd
+Unit nscd.service could not be found.
+
+
+2. nscd 서비스를 설치한다
+
+[centos@ip-172-31-9-97: ~]$ sudo yum install -y nscd
+
+3. nscd 서비스를 enable시킨 후에 시작한다
+
+[centos@ip-172-31-9-97: ~]$ sudo systemctl enable nscd
+Created symlink from /etc/systemd/system/multi-user.target.wants/nscd.service to /usr/lib/systemd/system/nscd.service.
+Created symlink from /etc/systemd/system/sockets.target.wants/nscd.socket to /usr/lib/systemd/system/nscd.socket.
+[centos@ip-172-31-9-97: ~]$ sudo systemctl start nscd
+
+4. nscd 상태가 active이면 정상적으로 시작된 것이다.
+
+[centos@ip-172-31-9-97: ~]$ sudo systemctl status nscd
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset:                                    disabled)
+   Active: active (running) since Wed 2019-07-17 02:18:14 UTC; 13s ago
+  Process: 21160 ExecStart=/usr/sbin/nscd $NSCD_OPTIONS (code=exited, status=0/S                                   UCCESS)
+ Main PID: 21161 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─21161 /usr/sbin/nscd
+
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
+Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal systemd[1]: St...
+Hint: Some lines were ellipsized, use -l to show in full.
+</pre></code>
 
 ### 8. Show the ntpd service is running
 <pre><code>
