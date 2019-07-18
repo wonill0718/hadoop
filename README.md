@@ -21,6 +21,8 @@ https://github.com/wonill0718/hadoop/blob/master/TEAM7_Cloudera%20Manager%20Inst
 https://github.com/wonill0718/hadoop/blob/master/TEAM7_Install%20CDH%20and%20Other%20Software.md
 
 
+
+# 
 <pre><code>
 ## tip
 for target_host in `cat ./target_hosts`
