@@ -1,5 +1,3 @@
-<img src="image/TEAM7_김두연.JPG" width="10%></img>
-
 # CM Install Lab
 https://github.com/wonill0718/hadoop/blob/master/TEAM7_CM%20Install%20Lab.md
 
@@ -15,7 +13,7 @@ https://github.com/wonill0718/hadoop/blob/master/TEAM7_Cloudera%20Manager%20Inst
 
 김두연  | 정병우 | 정원일 | 홍기철
 :------------ | :-----------: | -----------: | -----------:
-Left          | Center        | Right | 
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/TEAM7_%EA%B9%80%EB%91%90%EC%97%B0.JPG" width="10%"></img>        | Center        | Right | 
 
 
 
