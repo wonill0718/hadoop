@@ -17,7 +17,7 @@ https://github.com/wonill0718/hadoop/blob/master/TEAM7_MySQL%20Installation%20La
 # Cloudera Manager Install Lab2
 https://github.com/wonill0718/hadoop/blob/master/TEAM7_Cloudera%20Manager%20Install%20Lab2.md
 
-
-
+# TEAM7_Install CDH and Other Software
+https://github.com/wonill0718/hadoop/blob/master/TEAM7_Install%20CDH%20and%20Other%20Software.md
 
 
