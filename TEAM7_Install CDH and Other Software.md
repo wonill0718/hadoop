@@ -32,3 +32,9 @@
 <img src="https://github.com/wonill0718/hadoop/blob/master/image/cloudera manager.png"></img>
 
 ### 12. Add Service - oozie, hive, hue
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/hive.png"></img>
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/hive2.png"></img>
+
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/hue.png"></img>
+
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/oozie.png"></img>
