@@ -5,10 +5,10 @@
 --> Cloudera Enterprise Cloudera Enterprise Trial, which does not require a license, but expires after 60 days and cannot be renewed.
 
 ### 2. Specify hosts for your CDH cluster installation
---> host 파일을 참조하여 클러스트를 구성할 노드의 hostname 입력
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/cloudera manager.png"></img>
 
 ### 3. Select Repository
-
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/cluster-installation.PNG"></img>
 
 ### 4. JDK ->  기설치함, skip
 
