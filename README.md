@@ -13,7 +13,9 @@ https://github.com/wonill0718/hadoop/blob/master/TEAM7_MySQL%20Installation%20La
 https://github.com/wonill0718/hadoop/blob/master/TEAM7_Cloudera%20Manager%20Install%20Lab2.md
 
 
-
+김두연  | 정병우 | 정원일 | 홍기철
+:------------ | :-----------: | -----------: | -----------:
+Left          | Center        | Right | 
 
 
 
