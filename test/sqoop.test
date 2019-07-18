@@ -1,0 +1,73 @@
+## 뭔지 모르지만 담아봄
+[training@m1 accountdevice]$ hdfs dfs -put part-00000-f3b62dad-1054-4b2e-81fd-26e54c2ae76a.csv /user/training
+[training@m1 accountdevice]$ hdfs dfs -cat part-00000-f3b62dad-1054-4b2e-81fd-26e54c2ae76a.csv | head
+id,account_id,device_id,activation_date,account_device_id
+48692,32443,29,1393242509000,7351fed1-f344-4cdc-91b7-509ca3e0aee6
+48693,32444,4,1353649861000,6da22278-ff7a-4618-bc93-601207bedff3
+48694,32445,9,1331819465000,cb993b85-6775-4071-8292-3371e173b797
+48695,32446,43,1336860950000,48ea2c09-a0df-4d17-b1da-06a989f4270c
+48696,32446,29,1383650663000,4b49c0a6-d141-42e6-b3d2-767338bfbece
+48697,32447,6,1342578469000,cc8e8361-3d67-4be5-baca-ac885d78fc4e
+48698,32447,29,1386643231000,b40dba90-b073-4052-92cf-e5fe2b216319
+48699,32448,5,1350883104000,f088d30f-1e1c-47f4-b4ad-d73eb7e760e5
+48700,32448,29,1383321310000,2805df93-2e89-433c-a211-b5d6cd95a685
+cat: Unable to write to output stream.
+
+
+## mysql table 생성
+- MySql test.results 테이블 생성
+
+mysql -hm1 -utraining_hong -pskcc1234
+
+DROP TABLE hong.test;
+
+CREATE TABLE hong.test (
+   id varchar(10) NOT NULL Primary key
+ , account_id varchar(100)
+ , device_id varchar(100)
+ , activation_date varchar(100)
+ , account_device_id varchar(100)
+);
+
+
+
+- sqoop export
+
+sqoop export \
+--connect jdbc:mysql://172.31.8.60:3306/hong \
+--username training_hong \
+--password skcc1234 \
+--table test \
+--export-dir /user/training/hong/ \
+--input-fields-terminated-by ','
+
+
+
+
+- MySql test.results 테이블 생성
+CREATE TABLE `results` (
+  `id` int NOT NULL,
+  `fname` varchar(255) default NULL,
+  `lname` varchar(255) default NULL,
+  `num_posts` int default 0
+);
+
+- sqoop export
+sqoop export \
+--connect jdbc:mysql://localhost/test \
+--username training \
+--password training \
+--table results \
+--export-dir /results
+--input-fields-terminated-by '\t'
+
+
+
+
+sqoop import \
+--connect jdbc:mysql://172.31.8.60:3306/hong \
+--username training_hong \
+--password skcc1234 \
+--table test \
+--target-dir /user/training/test2 \
+--hive-import
