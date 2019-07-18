@@ -5,7 +5,7 @@
 --> Cloudera Enterprise Cloudera Enterprise Trial, which does not require a license, but expires after 60 days and cannot be renewed.
 
 ### 2. Specify hosts for your CDH cluster installation
-<img src="https://github.com/wonill0718/hadoop/blob/master/image/host-search.png"></img>
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/host-search.PNG"></img>
 
 ### 3. Select Repository
 <img src="https://github.com/wonill0718/hadoop/blob/master/image/cluster-installation.PNG"></img>
