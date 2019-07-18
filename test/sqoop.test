@@ -44,24 +44,6 @@ sqoop export \
 
 
 
-- MySql test.results 테이블 생성
-CREATE TABLE `results` (
-  `id` int NOT NULL,
-  `fname` varchar(255) default NULL,
-  `lname` varchar(255) default NULL,
-  `num_posts` int default 0
-);
-
-- sqoop export
-sqoop export \
---connect jdbc:mysql://localhost/test \
---username training \
---password training \
---table results \
---export-dir /results
---input-fields-terminated-by '\t'
-
-
 
 
 sqoop import \
