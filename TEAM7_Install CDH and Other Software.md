@@ -5,7 +5,7 @@
 --> Cloudera Enterprise Cloudera Enterprise Trial, which does not require a license, but expires after 60 days and cannot be renewed.
 
 ### 2. Specify hosts for your CDH cluster installation
-<img src="https://github.com/wonill0718/hadoop/blob/master/image/cloudera manager.png"></img>
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/host-search.png"></img>
 
 ### 3. Select Repository
 <img src="https://github.com/wonill0718/hadoop/blob/master/image/cluster-installation.PNG"></img>
@@ -29,6 +29,6 @@
 --> 데몬이 사용할 데이터베이스 및 계정정보 입력 ->  Test max_connections
 
 ### 11. First Run Command
-
+<img src="https://github.com/wonill0718/hadoop/blob/master/image/cloudera manager.png"></img>
 
 ### 12. Add Service - oozie, hive, hue
