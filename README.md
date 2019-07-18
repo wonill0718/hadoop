@@ -1,3 +1,5 @@
+![홍기철](./image/TEAM7_홍기철.JPG)
+
 # CM Install Lab
 https://github.com/wonill0718/hadoop/blob/master/TEAM7_CM%20Install%20Lab.md
 
