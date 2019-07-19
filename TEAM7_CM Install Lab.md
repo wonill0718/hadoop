@@ -67,24 +67,60 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 52.78.158.39	d1.skcc.com d1
 52.78.181.163	d2.skcc.com d2
 52.78.190.218	d3.skcc.com d3
-
-#private / public key 생성 -> 5개 node에 동일한 private key 배포, authorized_keys 에 5개 노드 등록
-[centos@d3 .ssh]$ ls -al
-total 16
-drwx------. 2 centos centos   71 Jul 17 03:44 .
-drwx------. 3 centos centos  104 Jul 17 03:46 ..
--rw-rw-r--. 1 centos centos 2528 Jul 17 02:23 1
--rw-------. 1 centos centos 2306 Jul 17 03:44 authorized_keys
--rw-------. 1 centos centos 1676 Jul 17 02:06 id_rsa
--rw-r--r--. 1 centos centos 1043 Jul 17 02:24 known_hosts
-[centos@d3 .ssh]$ cat authorized_keys
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJ48Vo3WQEHM/P2Fv8Nby9eFOKM/DR84Bc7bZIT5ZAKdOuHEq8WgallS2b01grR1tcQ0qJG9UCqDV0gBOhGSUj9AwqjRTNlhijSgSDSmoAqVLgJQViT4LW1NMQwRFeHABlqmGVMCZcB8muriwhIyCyCHJM/gPOFltI4VtV0z6emoofacpody/i4vpNEdMwniMN/ZUttaSdejiA4ShA36KsgrFJgGVNYJzLUfkptAdTI59D+cg4jasISzxAh4sSeMf4LQvcMkK0/VCIUEKcYzFKzyyCLRW3I0b6vFqdXVy4ob3q9/XW5Yv0xLtJ1CyQF0PbhGvOly0VUDJV3RcRVrSv skcc
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 m1
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 cm
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 d1
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 d2
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5mynD0n8wrbkrRfNfnSxLzXBfisd8pESLRCEFMfE2bXaO8O4+/4d3sHPJfiUcGaNxkS2rhgBWBYzu+oU/XiavURrgoMnRxrpJKNanuDP+4Vwq1ISKuKe7nkgpgOrk3M7hKGn51x6wLOUBSc04PHEc6Sj6JxuqcnO8tfHHaSuVLNwGaBKeCTgVrl8PJaSdG7vDxnr1uzCwUbtpE+lEvl9D++nLxdYBs5LEKMaqQN33Ogl5/nuWN37pFXJEpR24l/zYFV/k+dURkg3FUZS8PxC9DFvHQ84yuScoWDbKSpty9NHSuiEjbvSkei+aKIxhLiLCtISkTm8U4JEvbanB1/7 d3
 </code></pre>
+
+- SSH 키 생성
+```
+[centos@d3 ~]$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/centos/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase): (enter)
+Enter same passphrase again: (enter)
+Your identification has been saved in /home/centos/.ssh/id_rsa.
+Your public key has been saved in /home/centos/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:wouk+1aqVndIYB37eh1y9SfqfyyKELq9cbUkFh7Fzpw centos@d3.com
+The key's randomart image is:
++---[RSA 2048]----+
+|     ...   ..    |
+|    o ..   ..    |
+|   . ..   o+..   |
+|     ... . +E.   |
+|    ..o.S * o o .|
+|   o..+=.* = o o |
+|  ...++.+ o o  . |
+|  ..o  + + o  . o|
+| .o+. . o.. oo.o |
++----[SHA256]-----+
+```
+
+- SSH 키 복사
+```
+[centos@d3 .ssh]$ ssh-copy-id centos@m1
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/centos/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+centos@m1's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'centos@m1'"
+and check to make sure that only the key(s) you wanted were added.
+```
+
+- 각 서버별로 복사 및 접속 확인
+```
+$ ssh-copy-id centos@m1
+$ ssh-copy-id centos@cm
+$ ssh-copy-id centos@d1
+$ ssh-copy-id centos@d2
+$ ssh-copy-id centos@d3
+$ ssh m1
+$ ssh cm
+$ ssh d1
+$ ssh d2
+$ ssh d3
+```
 
 ### 7. Show the nscd service is running
 <pre><code>
