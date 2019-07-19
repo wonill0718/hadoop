@@ -1,0 +1,441 @@
+평가당일 
+p1
+클러스터 1시간 / 실습 1:15분
+
+p2
+
+
+
+클러스터 띄우는거 실패시 다시줌
+
+답 내고나면 스크린샷 바로바로 떠놔라
+
+
+all.zip -> 그동안 했던 lab
+
+
+
+hdfs yarn zookeeper
+
+이후에 따로따로 서비스 추가해서올림
+
+
+jdk 1.8 깔고 패키지 하고 추가인스톨
+
+
+training계정생성 후 grant해줘야함
+
+
+hive, oozie
+
+hue
+
+spark2
+
+skark2쓸려면 cdh5.15.2 검색하면 나오는데..
+
+sudo wget http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.4.0.cloudera2.jar
+
+[centos@m1 ~]$ cd /opt/cloudera/csd
+[centos@m1 csd]$ ll
+total 0
+[centos@m1 csd]$ sudo cp ~/SPARK2_ON_YARN-2.4.0.cloudera2.jar SPARK2_ON_YARN-2.4.0.cloudera2.jar
+[centos@m1 csd]$ ll
+total 20
+-rw-r--r-- 1 root root 19066 Jul 18 04:44 SPARK2_ON_YARN-2.4.0.cloudera2.jar
+[centos@m1 csd]$ pwd
+/opt/cloudera/csd
+
+
+sudo systemctl restart cloudera-scm-server
+
+csd 추가(jar파일) 특정경로에 떤지고  cm restart
+
+service cloudera-scm-server restart
+
+spark2 install~
+
+
+kafka도 깔아보고
+
+
+kafka
+
+
+
+These are the commands for AWS CM install
+
+*************** START OF PREQUAL ************************
+
+** update yum
+sudo yum -y update
+sudo yum install -y wget
+
+** Change the run level to multi-user text mode
+sudo systemctl get-default
+sudo systemctl set-default multi-user.target
+
+** Disable firewall
+sudo systemctl disable firewalld
+sudo systemctl status firewalld
+
+** Change VM Swappiness permanently
+sudo vi /etc/sysctl.conf
+	add ->
+vm.swappiness=1
+
+//////////////////////////sudo sysctl vm.swappiness=1
+
+** Disable SE Linux
+sudo vi /etc/selinux/config 
+	change-> SELINUX=disabled
+
+** Disable Transparent Hugepage Support
+sudo vi /etc/rc.d/rc.local
+	add -> 
+echo "never" > /sys/kernel/mm/transparent_hugepage/enabled
+echo "never" > /sys/kernel/mm/transparent_hugepage/defrag
+
+sudo chmod +x /etc/rc.d/rc.local
+sudo vi /etc/default/grub
+   add -> transparent_hugepage=never (on line GRUB_CMDLINE_LINUX )
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo systemctl start tuned
+sudo tuned-adm off
+sudo tuned-adm list
+sudo systemctl stop tuned
+sudo systemctl disable tuned
+
+** Check to see that nscd service is running
+sudo yum install -y nscd
+sudo systemctl enable nscd
+sudo systemctl start nscd
+sudo systemctl status nscd
+
+** Check to see that ntp service is running
+sudo systemctl stop chronyd
+sudo systemctl disable chronyd
+sudo yum -y install ntp
+sudo systemctl enable ntpd.service
+sudo systemctl start ntpd.service
+sudo ntpdate -u 0.rhel.pool.ntp.org
+sudo hwclock --systohc
+sudo systemctl status ntpd.service
+
+** check to make sure that File lookup has priority
+sudo vi /etc/nsswitch.conf
+
+** Disable IPV6
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
+*************** END OF PREQUAL ************************
+
+
+
+** setup a password for centos in each of the hosts(5nodes)
+sudo passwd centos
+sudo vi /etc/ssh/sshd_config
+	change ->
+PasswordAuthentication yes
+sudo systemctl restart sshd.service
+
+** Update /etc/host
+sudo vi /etc/hosts
+	add -> 
+******* THIS IS PUBLIC IP (Add this to your Mac/Windows environment)
+52.78.239.130  wm1.skcc.com	wm1
+52.78.38.121   wcm.skcc.com	wcm
+52.79.125.128  wd1.skcc.com	wd1
+52.79.142.151  wd2.skcc.com	wd2
+52.79.190.160  wd3.skcc.com	wd3
+
+******* THIS IS PRIVATE IP (Add this to each of the hosts)
+172.31.13.180  wm1.skcc.com	wm1
+172.31.11.219  wcm.skcc.com	wcm
+172.31.3.95    wd1.skcc.com	wd1
+172.31.8.108   wd2.skcc.com	wd2
+172.31.10.28   wd3.skcc.com	wd3
+
+
+
+** Change the hostname
+
+sudo hostnamectl set-hostname wm1.skcc.com
+hostname -f
+sudo reboot
+
+sudo hostnamectl set-hostname wcm.skcc.com
+hostname -f
+sudo reboot
+
+sudo hostnamectl set-hostname wd1.skcc.com
+hostname -f
+sudo reboot
+
+sudo hostnamectl set-hostname wd2.skcc.com
+hostname -f
+sudo reboot
+
+sudo hostnamectl set-hostname wd3.skcc.com
+hostname -f
+sudo reboot
+
+** REBOOT THE SERVER AND CHECK
+
+** check hostname resolution
+** first put something in /etc/hosts and then
+
+getent hosts cm.skcc.com (for example)
+
+** Install JDK on all machines
+////////////////// From the Mac 
+////////////////cd ~/Downloads
+////////////////scp -i ~/KeyPair/SEBC_HP.pem jdk-8u211-linux-x64.rpm centos@d3:. &
+////////////////// From each of the nodes
+////////////////sudo -i rpm -ivh /home/centos/jdk-8u211-linux-x64.rpm
+////////////////java -version
+// OR using yum
+yum list java*jdk-devel
+sudo yum install -y java-1.8.0-openjdk-devel.x86_64
+#sudo yum install -y oracle-j2sdk1.8
+
+
+***** Configure repository on the cm host
+////////////////sudo yum install -y wget
+sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo \
+-P /etc/yum.repos.d/
+
+cd /etc/yum.repos.d/
+sudo vi cloudera-manager.repo
+** change the baseurl within cloudera-manager.repo to fit the version you want to install
+** baseurl=https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
+** for example: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
+
+sudo rpm --import \
+https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+
+
+** Install Cloudera Manager on the cm host
+sudo yum install -y cloudera-manager-daemons cloudera-manager-server
+
+mairadb는 user pw를 8자리 이상으로해야함(default setting이라면)
+
+** Install My-Sql on the cm host
+cd ~
+sudo wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+///////////////////////////////sudo yum update
+sudo yum install -y mysql-server
+sudo systemctl start mysqld
+
+--config
+sudo systemctl stop mysqld
+
+Move old InnoDB log files /var/lib/mysql/ib_logfile0 and /var/lib/mysql/ib_logfile1 out of /var/lib/mysql/ to a backup location.
+cd /var/lib/mysql/
+sudo mkdir -m 777 backup
+cd backup
+sudo mv /var/lib/mysql/ib_logfile0 ./
+sudo mv /var/lib/mysql/ib_logfile1 ./
+
+sudo vi /etc/my.cnf
+
+========================================================================
+
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+transaction-isolation = READ-COMMITTED
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+symbolic-links = 0
+
+key_buffer_size = 32M
+max_allowed_packet = 32M
+thread_stack = 256K
+thread_cache_size = 64
+query_cache_limit = 8M
+query_cache_size = 64M
+query_cache_type = 1
+
+max_connections = 550
+#expire_logs_days = 10
+#max_binlog_size = 100M
+
+#log_bin should be on a disk with enough free space.
+#Replace '/var/lib/mysql/mysql_binary_log' with an appropriate path for your
+#system and chown the specified folder to the mysql user.
+log_bin=/var/lib/mysql/mysql_binary_log
+
+#In later versions of MySQL, if you enable the binary log and do not set
+#a server_id, MySQL will not start. The server_id must be unique within
+#the replicating group.
+server_id=1
+
+binlog_format = mixed
+
+read_buffer_size = 2M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 8M
+join_buffer_size = 8M
+
+# InnoDB settings
+innodb_file_per_table = 1
+innodb_flush_log_at_trx_commit  = 2
+innodb_log_buffer_size = 64M
+innodb_buffer_pool_size = 4G
+innodb_thread_concurrency = 8
+innodb_flush_method = O_DIRECT
+innodb_log_file_size = 512M
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+sql_mode=STRICT_ALL_TABLES
+
+========================================================================
+
+sudo systemctl enable mysqld
+
+sudo systemctl start mysqld
+
+sudo /usr/bin/mysql_secure_installation
+
+
+[...]
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+[...]
+Set root password? [Y/n] Y
+New password:
+Re-enter new password:
+Remove anonymous users? [Y/n] Y
+[...]
+Disallow root login remotely? [Y/n] N
+[...]
+Remove test database and access to it [Y/n] Y
+[...]
+Reload privilege tables now? [Y/n] Y
+All done!
+
+
+
+
+** Install mysql connector on all sqoop gateway hosts
+// From the mac after downloading
+////////////////scp -i ~/KeyPair/SEBC_HP.pem ~/Downloads/mysql-connector-java-5.1.47.tar.gz centos@acm:. 
+// Or using wget
+////////////////sudo yum install -y wget
+////////////////wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.47.tar.gz
+
+// From cm node
+////////////////cd /home/centos
+////////////////tar zxvf mysql-connector-java-5.1.47.tar.gz
+////////////////sudo mkdir -p /usr/share/java/
+////////////////cd mysql-connector-java-5.1.47
+////////////////sudo cp mysql-connector-java-5.1.47-bin.jar /usr/share/java/mysql-connector-java.jar
+
+cd ~
+sudo wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
+sudo mkdir -p /usr/share/java/
+sudo cp mysql-connector-java-5.1.47.jar /usr/share/java/mysql-connector-java.jar
+
+
+sudo scp /usr/share/java/mysql-connector-java.jar centos@wm1:/home/centos/mysql-connector-java.jar
+sudo scp /usr/share/java/mysql-connector-java.jar centos@wd1:/home/centos/mysql-connector-java.jar
+sudo scp /usr/share/java/mysql-connector-java.jar centos@wd2:/home/centos/mysql-connector-java.jar
+sudo scp /usr/share/java/mysql-connector-java.jar centos@wd3:/home/centos/mysql-connector-java.jar
+
+// other all nodes copy
+ssh m1 ~ d1,2,3
+sudo mkdir -p /usr/share/java/
+sudo cp /home/centos/mysql-connector-java.jar /usr/share/java/mysql-connector-java.jar
+
+
+** Create the databases and users in mysql
+mysql -u root -p
+
+drop database if exists scm;
+CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON scm.* TO 'scmuser'@'%' IDENTIFIED BY 'skcc';
+
+drop database if exists metastore;
+CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON metastore.* TO 'hiveuser'@'%' IDENTIFIED BY 'skcc';
+
+drop database if exists amon;
+CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON amon.* TO 'amonuser'@'%' IDENTIFIED BY 'skcc';
+
+drop database if exists rman;
+CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON rman.* TO 'rmanuser'@'%' IDENTIFIED BY 'skcc';
+
+drop database if exists oozie;
+CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON oozie.* TO 'oozieuser'@'%' IDENTIFIED BY 'skcc';
+
+drop database if exists hue;
+CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON hue.* TO 'hueuser'@'%' IDENTIFIED BY 'skcc';
+
+drop database if exists sentry;
+CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+GRANT ALL ON sentry.* TO 'sentryuser'@'%' IDENTIFIED BY 'skcc';
+
+FLUSH PRIVILEGES;
+SHOW DATABASES;
+EXIT;
+
+
+
+** Setup the CM database
+sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scmuser skcc
+sudo rm /etc/cloudera-scm-server/db.mgmt.properties
+sudo systemctl start cloudera-scm-server
+
+
+mysql -u root -p 
+
+grant all privileges on *.* to training@'%' identified by 'training';
+
+quit;
+
+mysql -u training -p 
+
+CREATE DATABASE test ;
+
+use test;
+
+CREATE TABLE dept (
+  dept_no INT(11) unsigned NOT NULL,
+  dept_name VARCHAR(32) NOT NULL,
+  PRIMARY KEY (dept_no)
+);
+
+CREATE TABLE posts ( 
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  subject varchar(255) NOT NULL,
+  content mediumtext,
+  created datetime,
+  user_id int(10) unsigned NOT NULL,
+  user_name varchar(32) NOT NULL,
+  hit int(10) unsigned NOT NULL default '0',  
+  PRIMARY KEY (id)
+);
+
+
+cmip.7180
+
+jdk설치 x
+개인용x
+다른사용자 centos로
+
+
+
+namenode,yarn(rm, jobhistory server),zookeeper m1
+sec namenode 등 기타 :  cm
+datanode : d1~3
