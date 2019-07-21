@@ -22,8 +22,7 @@ centos  계정 및 password  입력
 
 ##### 7. Install Agents / Parcels / Inspect hosts for correctness
 -->Install Agents
-<img src="https://github.com/gichul-hong/
-hadoop-test-2019/blob/master/image/4_install_agent.PNG" />
+<img src="https://github.com/gichul-hong/hadoop-test-2019/blob/master/image/4_install_agent.PNG" />
 
 --> Install Clusters
 <img src="https://github.com/gichul-hong/hadoop-test-2019/blob/master/image/5_install_cluster.PNG" />
