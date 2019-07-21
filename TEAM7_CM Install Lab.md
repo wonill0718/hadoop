@@ -1,14 +1,17 @@
-##### CM Install Lab
+### CM Install Lab
+
 #### System Configuration Checks
 
-### 1. Check vm.swappiness on all your nodes o Set the value to 1 if necessary
-<pre><code>
+##### 1. Check vm.swappiness on all your nodes o Set the value to 1 if necessary
+```
+/etc/sysctl.conf 파일에 "vm.swappiness=1" 구문 추가
+
 [centos@ip-172-31-9-97 ~]$ sudo sysctl vm.swappiness=1
 vm.swappiness = 1
-</code></pre>
+```
 
-### 2. Show the mount attributes of your volume(s)
-<pre><code>
+##### 2. Show the mount attributes of your volume(s)
+```
 [centos@m1: /home/centos]$ df
 Filesystem     1K-blocks    Used Available Use% Mounted on
 /dev/nvme0n1p1 104846316 1344872 103501444   2% /
@@ -17,21 +20,36 @@ tmpfs            7895692       0   7895692   0% /dev/shm
 tmpfs            7895692   17092   7878600   1% /run
 tmpfs            7895692       0   7895692   0% /sys/fs/cgroup
 tmpfs            1579140       0   1579140   0% /run/user/1000
-</code></pre>
+```
 
-### 3. If you have ext-based volumes, list the reserve space setting
-<pre><code>
-Not exist ext-based volumes
-</code></pre>
+##### 3. If you have ext-based volumes, list the reserve space setting
+```
+No ext-based volumes
+```
 
-### 4. Disable transparent hugepage support
-<pre><code>
-# cat /sys/kernel/mm/transparent_hugepage/enabled
-always madvise [never]
-</code></pre>
+##### 4. Disable transparent hugepage support
+```
+## /etc/rc.d/rc.local 파일에 아래 구문 추가
+1. echo "never" > /sys/kernel/mm/transparent_hugepage/enabled
+2. echo "never" > /sys/kernel/mm/transparent_hugepage/defrag
 
-### 5. List your network interface configuration
-<pre><code>
+## /etc/default/grub 파일에 아래 구문 추가
+1. transparent_hugepage=never (on line GRUB_CMDLINE_LINUX )
+
+## 실행권한 추가
+sudo chmod +x /etc/rc.d/rc.local
+
+## disable demon
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo systemctl start tuned
+sudo tuned-adm off
+sudo tuned-adm list
+sudo systemctl stop tuned
+sudo systemctl disable tuned
+```
+
+##### 5. List your network interface configuration
+```
 [centos@m1: /home/centos]$ ifconfig
 ens5: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
         inet 172.31.9.97  netmask 255.255.240.0  broadcast 172.31.15.255
@@ -50,10 +68,11 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 379  bytes 180665 (176.4 KiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-</code></pre>
+```
 
-### 6. Show that forward and reverse host lookups are correctly resolved
-<pre><code>
+
+##### 6. Show that forward and reverse host lookups are correctly resolved
+```
 #hostname 변경
 [centos@m1: ~]$ hostnamectl set-hostname m1.skcc.com
 [centos@cm: ~]$ hostnamectl set-hostname cm.skcc.com
@@ -67,7 +86,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 52.78.158.39	d1.skcc.com d1
 52.78.181.163	d2.skcc.com d2
 52.78.190.218	d3.skcc.com d3
-</code></pre>
+```
 
 - SSH 키 생성
 ```
@@ -122,8 +141,8 @@ $ ssh d2
 $ ssh d3
 ```
 
-### 7. Show the nscd service is running
-<pre><code>
+##### 7. Show the nscd service is running
+```
 # 1. nscd 상태를 체크한다
 [centos@ip-172-31-9-97: ~]$ sudo systemctl status nscd
 Unit nscd.service could not be found.
@@ -162,10 +181,10 @@ Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
 Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal nscd[21161]: 2...
 Jul 17 02:18:14 ip-172-31-9-97.ap-northeast-2.compute.internal systemd[1]: St...
 Hint: Some lines were ellipsized, use -l to show in full.
-</pre></code>
+```
 
-### 8. Show the ntpd service is running
-<pre><code>
+##### 8. Show the ntpd service is running
+```
 [centos@ip-172-31-9-97 ~]$ sudo yum install ntp
 [centos@ip-172-31-9-97 ~]$ sudo service ntpd start
-</code></pre>
+```
